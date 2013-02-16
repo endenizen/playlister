@@ -47,7 +47,7 @@
         results: 30};
       this.call('playlist', 'static', params, function(results) {
         var res = [];
-        if (results){
+        if (results.length){
           // Take each result and get eh foreign id.
           // Sample JSON and igt explains the shitshow below.
           // "songs": [
