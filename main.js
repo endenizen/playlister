@@ -49,7 +49,7 @@
         var res = [];
         if (results.length){
           // Take each result and get eh foreign id.
-          // Sample JSON and igt explains the shitshow below.
+          // Sample JSON and explains the shitshow below.
           // "songs": [
           //   {
           //     "foreign_ids": [
