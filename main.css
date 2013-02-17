@@ -1,0 +1,28 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+#go {
+  display: none;
+}
+
+#tracks {
+  display: none;
+}
+
+#save {
+  display: none;
+}
+
+#searchresults {
+  display: none;
+}
+
+#save .savepanel {
+  display: none;
+}
+
+#searchrow table {
+
+}
