@@ -47,7 +47,7 @@ table {
 /* END RESET */
 
 html, body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Pirata One', sans-serif;
   background-color: #fff;
   color: #000;
   user-select: none;
@@ -58,12 +58,20 @@ html, body {
 input {
   background-color: #fff;
   color: #000;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Pirata One', sans-serif;
   border: 1px solid ;
-  line-height: 20px;
-  font-size: 20px;
+  line-height: 40px;
+  font-size: 32px;
   padding: 10px;
   outline: 0;
+}
+
+.button {
+  font-size: 32px;
+  margin-left: 20px;
+  padding: 10px;
+  border: 1px solid;
+  cursor: pointer;
 }
 
 body.partymode {
@@ -136,9 +144,10 @@ table td {
 
 #tracks {
   display: none;
-  width: 340px;
+  width: 415px;
   margin-top: 20px;
   text-align: left;
+  overflow: hidden;
 }
 
 #tracks li {
@@ -204,7 +213,7 @@ table td {
 }
 
 #searchresults .searchlist {
-  width: 340px;
+  width: 590px;
   margin: 0 auto;
   height: 100%;
   overflow: auto;
@@ -233,7 +242,7 @@ table td {
 }
 
 .tracklist li {
-  font-size: 17px;
+  font-size: 25px;
   line-height: 50px;
   white-space: nowrap;
 }
@@ -243,14 +252,6 @@ table td {
   width: 50px;
   height: 50px;
   margin-right: 5px;
-}
-
-.button {
-  font-size: 20px;
-  margin-left: 20px;
-  padding: 10px;
-  border: 1px solid;
-  cursor: pointer;
 }
 
 .wizard {

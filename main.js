@@ -54,6 +54,11 @@
     songRadio: function(trackKeys, k) {
       Echonest.songIds(trackKeys, function(enkeys) {
 
+        if (!enkeys || !enkeys.length) {
+          k();
+          return;
+        }
+
         var params = {
           song_id: enkeys, 
           type: 'song-radio', 
@@ -160,14 +165,11 @@
       $('#go').hide();
       var wiz = $('.wizard');
       wiz.addClass('loading');
+
       this.extend(trackKeys, function(tracks) {
-        R.request({
-          method: 'get',
-          content: {
-            keys: tracks
-          },
-          success: function(response) {
-            wiz.removeClass('loading');
+        var done = function(response) {
+          wiz.removeClass('loading');
+          if (response) {
             var trackObjs = [];
             _.each(tracks, function(trackKey) {
               var newObj = response.result[trackKey];
@@ -178,6 +180,20 @@
             self.renderTracks(trackObjs);
             $('.left').removeClass('initial');
             $('#save').show();
+          }
+        };
+
+        if (!tracks || !tracks.length) {
+          done();
+          return;
+        }
+        R.request({
+          method: 'get',
+          content: {
+            keys: tracks
+          },
+          success: function(response) {
+            done(response);
           }
         });
       });
