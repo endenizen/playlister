@@ -66,6 +66,10 @@ input {
   outline: 0;
 }
 
+body.partymode {
+  overflow: hidden;
+}
+
 table td {
   vertical-align: middle;
 }
@@ -106,6 +110,7 @@ table td {
   height: 100%;
   width: 100%;
   text-align: center;
+  background-color: #000;
 }
 
 .partyMode #artwork {
@@ -117,6 +122,10 @@ table td {
   margin: 0 auto;
   position: absolute;
   bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(0,0,0,0.9);
+  color: #fff;
 }
 
 #tracks {

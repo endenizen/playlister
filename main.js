@@ -216,6 +216,7 @@
       R.player.play({ source: playlistKey });
       $('.search').fadeOut();
       $('.partyMode').fadeIn();
+      $('body').addClass('partymode');
 
       R.player.on("change:playingTrack", function(song) {
         $('#artwork').attr('src', song.get('icon').replace('200', '1200'));
@@ -285,6 +286,12 @@
       $('#content').show();
     },
 
+    onWizardClicked: function() {
+      if ($('#tracks').find('li').length > 0) {
+        this.onGoClicked();
+      }
+    },
+
     init: function() {
       var self = this;
 
@@ -294,7 +301,7 @@
 
       _.bindAll(this, 'onSearchClicked', 'onSearchKeyDown', 'onSearchResultSelected', 'onGoClicked',
         'onSaveClicked', 'onSaveConfirmClicked', 'onSaveCancelClicked', 'onHideSearchResultsClicked',
-        'onRemoveTrackClicked', 'onAuthClicked', 'playOrPause', 'playerPrevious', 'playerNext');
+        'onRemoveTrackClicked', 'onAuthClicked', 'playOrPause', 'playerPrevious', 'playerNext', 'onWizardClicked');
 
       $('#seedtracks')
         .on('click', '.removetrack', this.onRemoveTrackClicked);
@@ -316,6 +323,9 @@
 
       $('#auth')
         .on('click', '.wizard', this.onAuthClicked);
+
+      $('.right')
+        .on('click', '.wizard', this.onWizardClicked);
 
       // Play controls JS events
       $('#play')
