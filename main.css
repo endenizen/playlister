@@ -119,6 +119,60 @@ table td {
   width: 100%;
   text-align: center;
   background-color: #000;
+  /* IE10 Consumer Preview */ 
+  background-image: 
+    -ms-radial-gradient(
+      center, 
+      ellipse closest-corner, 
+      #474747 0%, 
+      #000000 100%);
+
+  /* Mozilla Firefox */ 
+  background-image: 
+    -moz-radial-gradient(
+      center, 
+      ellipse closest-corner, 
+      #474747 0%, 
+      #000000 100%
+    );
+
+  /* Opera */ 
+  background-image: 
+    -o-radial-gradient(
+      center, 
+      ellipse closest-corner, 
+      #474747 0%, 
+      #000000 100%
+    );
+
+  /* Webkit (Safari/Chrome 10) */ 
+  background-image: 
+    -webkit-gradient(
+      radial, 
+      center center, 
+      0, 
+      center center, 
+      497, 
+      color-stop(0, #474747), 
+      color-stop(1, #000000)
+    );
+
+  /* Webkit (Chrome 11+) */ 
+  background-image: 
+    -webkit-radial-gradient(
+      center, 
+      ellipse closest-corner, 
+      #474747 0%, 
+      #000000 100%
+    );
+
+  /* W3C Markup, IE10 Release Preview */ 
+  background-image: 
+    radial-gradient(
+      ellipse closest-corner at center, 
+      #474747 0%, 
+      #000000 100%
+    );
 }
 
 #artwork {
@@ -127,13 +181,25 @@ table td {
 }
 
 #partymode .playcontrols {
+  display: block;
   margin: 0 auto;
   position: absolute;
   bottom: 0;
   width: 100%;
   padding: 20px 0;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0,0,0,0.4);
+  opacity: 0.3;
   color: #fff;
+  font-size: 32px;
+
+}
+
+#partymode .playcontrols:hover {
+  opacity: 1.0;
+}
+
+.playcontrols #play {
+  padding: 0 10px;
 }
 
 #partymode .playcontrols .previous,
