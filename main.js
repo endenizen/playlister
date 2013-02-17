@@ -58,8 +58,7 @@
           song_id: enkeys, 
           type: 'song-radio', 
           limit: true, 
-          results: 30,
-          song_type: 'studio:seed'
+          results: 30
         };
 
         Echonest.call('playlist', 'static', params, function(results) {
