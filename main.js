@@ -197,6 +197,7 @@
 
     launchPartyMode: function(playlistKey) {
       R.player.play({ source: playlistKey });
+      $('#content').hide();
     },
 
     onSaveConfirmClicked: function(e) {

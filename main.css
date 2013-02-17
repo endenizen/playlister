@@ -91,6 +91,10 @@ table td {
   text-transform: uppercase;
 }
 
+.playcontrols {
+  display: none;
+}
+
 #tracks {
   display: none;
   width: 340px;
