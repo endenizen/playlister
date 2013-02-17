@@ -1,10 +1,85 @@
+/* START RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* END RESET */
+
 html, body {
   height: 100%;
   overflow: hidden;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #221111;
+  color: #ccbbaa;
+  -webkit-user-select: none;
+}
+
+input {
+  background-color: #444455;
+  color: #ccbbaa;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: 1px solid ;
+  border-radius: 10px;
+  line-height: 20px;
+  font-size: 20px;
+  padding: 10px;
+  outline: 0;
+}
+
+table td {
+  vertical-align: middle;
+}
+
+#content {
+  height: 80%;
+  overflow: auto;
 }
 
 #go {
   display: none;
+  line-height: 50px;
+  margin-top: 20px;
 }
 
 #tracks {
@@ -15,14 +90,70 @@ html, body {
   display: none;
 }
 
+#seedtracks {
+  display: none;
+  background: white;
+  color: black;
+  width: 340px;
+  padding: 10px;
+  border-radius: 5px 5px 0 0;
+}
+
+#seedtracks .removetrack {
+  float: right;
+}
+
+#seedtracks .seedtrack {
+  text-align: left;
+}
+
 #searchresults {
   display: none;
+  width: 340px;
+  text-align: left;
+  border-radius: 0 0 5px 5px;
+  background-color: #998866;
+  color: #221111;
+}
+
+#searchresults .hidesearch {
+  float: right;
+}
+
+#searchresults .searchlist li {
+  border-top: 1px solid #ccbbaa;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#searchresults .searchlist li:hover {
+  background-color: blue;
+}
+
+#searchresults .searchlist li:first-child {
+  border-top: 0;
 }
 
 #save .savepanel {
   display: none;
 }
 
-#searchrow table {
+#searchrow {
+  background-color: #444455;
+  width: 400px;
+  padding: 10px 0;
+  border-radius: 20px;
 
+}
+
+.button {
+  font-size: 20px;
+  margin-left: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+#searchrow .searchbutton {
 }

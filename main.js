@@ -90,7 +90,6 @@
     onSearchClicked: function() {
       var self = this;
 
-      // get query from sibling textbox
       var query = $('#searchrow').find('input').val();
 
       // call api
@@ -117,8 +116,8 @@
     onSearchResultSelected: function(e) {
       var track = this.trackLookup[$(e.target).data('key')];
       var tmp = _.template($('#seedtrack-template').text());
-      $('#seedtracks').append(tmp({ track: track }));
       $('#searchresults').hide();
+      $('#seedtracks').append(tmp({ track: track })).show();
       $('#searchrow').find('input').val('').focus();
       $('#go').show();
     },
@@ -126,7 +125,7 @@
     // Trigger the extending of the playlist
     onGoClicked: function() {
       var self = this;
-      var tracks = $('#seedtracks').children();
+      var tracks = $('#seedtracks').find('.seedtrack');
       var trackKeys = [];
       _.each(tracks, function(track) {
         trackKeys.push($(track).data('key'));
@@ -220,6 +219,7 @@
       var curSeeds = $('#seedtracks').find('.seedtrack');
       if (curSeeds.length === 1) {
         $('#go').hide();
+        $('#seedtracks').hide();
       }
       var el = $(e.target);
       el.closest('.seedtrack').remove();
@@ -230,6 +230,8 @@
 
       this.trackLookup = {};
 
+      $.fx.speeds._default = 200;
+
       _.bindAll(this, 'onSearchClicked', 'onSearchKeyDown', 'onSearchResultSelected', 'onGoClicked',
         'onSaveClicked', 'onSaveConfirmClicked', 'onSaveCancelClicked', 'onHideSearchResultsClicked',
         'onRemoveTrackClicked');
@@ -237,7 +239,7 @@
       $('#seedtracks')
         .on('click', '.removetrack', this.onRemoveTrackClicked);
 
-      $('#searchrow')
+      $('#searchrow').find('input').focus().end()
         .on('keydown', 'input', this.onSearchKeyDown)
         .on('click', '.searchbutton', this.onSearchClicked);
 

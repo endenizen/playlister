@@ -2,7 +2,10 @@
 <html>
   <head>
     <title>Playlister</title>
-    <link rel="stylesheet" href="main.css" />
+
+    <link rel="stylesheet" href="main.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
     <script src="https://rdio.com/api/api.js?client_id=DWs_aCu12-rS7kSxJkw8lg"></script>
     <script src="underscore-min.js"></script>
     <script src="jquery-1.9.1.min.js"></script>
@@ -17,7 +20,7 @@
     <script id="tracklist-template" type="text/template">
       <ul>
         <% _.each(tracks, function(track) { %>
-          <li data-key="<%= track.key %>"><%= track.name %></li>
+          <li data-key="<%= track.key %>"><%= track.artist %> - <%= track.name %></li>
         <% }); %>
       </ul>
     </script>
@@ -27,21 +30,21 @@
       <div id="content" class="search">
         <div id="seedtracks"></div>
         <div id="searchrow">
-          <input type="text" /><span class="searchbutton">Search</span>
+          <input type="text" placeholder="Search for a song" /><span class="searchbutton button">Search</span>
         </div>
         <div id="searchresults">
           <span class="hidesearch">X</span>
           <div class="searchlist"></div>
         </div>
         <div id="go">
-          <span>GO!</span>
+          <span class="button">GO!</span>
         </div>
         <div id="tracks"></div>
         <div id="save">
           <span class="launchsave">Save</span>
           <div class="savepanel">
-            <input type="text" /> <span class="confirmsave">Create</span>
-            <span class="cancelsave">Cancel</span>
+            <input type="text" /> <span class="confirmsave button">Create</span>
+            <span class="cancelsave button">Cancel</span>
           </div>
         </div>
       </div>
