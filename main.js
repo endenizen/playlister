@@ -117,12 +117,16 @@
           _.each(tracks, function(track) {
             self.trackLookup[track.key] = track;
           });
-          var tmp = _.template($('#tracklist-template').text());
-          $('#searchresults')
-            .find('.searchlist').html(tmp({ tracks: tracks })).end()
-            .show();
+          self.displaySearchResults(tracks);
         }
       });
+    },
+
+    displaySearchResults: function(tracks) {
+      var tmp = _.template($('#tracklist-template').text());
+      $('#searchresults')
+        .find('.searchlist').html(tmp({ tracks: tracks })).end()
+        .show();
     },
 
     // Add selected result to seed track list (using trackLookup)
@@ -133,6 +137,11 @@
       $('#seedtracks').append(tmp({ track: track })).show();
       $('#searchrow').find('input').val('').focus();
       $('#go').show();
+      this.playTrack(track);
+    },
+
+    playTrack: function(track) {
+      R.player.play({ source: track.key });
     },
 
     // Trigger the extending of the playlist
@@ -143,11 +152,14 @@
       _.each(tracks, function(track) {
         trackKeys.push($(track).data('key'));
       });
+      R.player.pause();
       $('#save').hide();
       $('#tracks').hide();
       $('#searchrow').hide();
       $('#seedtracks').find('.removetrack').hide();
       $('#go').hide();
+      var wiz = $('.wizard');
+      wiz.addClass('loading');
       this.extend(trackKeys, function(tracks) {
         R.request({
           method: 'get',
@@ -155,6 +167,7 @@
             keys: tracks
           },
           success: function(response) {
+            wiz.removeClass('loading');
             var trackObjs = [];
             _.each(tracks, function(trackKey) {
               var newObj = response.result[trackKey];
@@ -163,6 +176,7 @@
               }
             });
             self.renderTracks(trackObjs);
+            $('.left').removeClass('initial');
             $('#save').show();
           }
         });
@@ -172,6 +186,9 @@
     onSearchKeyDown: function(e) {
       if (e.keyCode === 13) {
         this.onSearchClicked();
+      }
+      if ($('#searchresults').is(':visible')) {
+        this.onHideSearchResultsClicked();
       }
     },
 
@@ -222,13 +239,7 @@
       _.each($('#seedtracks, #tracks ul').children(), function(trackEl) {
         tracks.push($(trackEl).data('key'));
       });
-      if (R.authenticated()) {
-        this.savePlaylist(name, tracks);
-      } else {
-        R.authenticate(function() {
-          self.savePlaylist(name, tracks);
-        });
-      }
+      this.savePlaylist(name, tracks);
     },
 
     onSaveCancelClicked: function() {
@@ -254,6 +265,18 @@
       el.closest('.seedtrack').remove();
     },
 
+    onAuthClicked: function() {
+      var self = this;
+      R.authenticate(function() {
+        self.loggedIn();
+      })
+    },
+
+    loggedIn: function() {
+      $('#auth').hide();
+      $('#content').show();
+    },
+
     init: function() {
       var self = this;
 
@@ -263,7 +286,7 @@
 
       _.bindAll(this, 'onSearchClicked', 'onSearchKeyDown', 'onSearchResultSelected', 'onGoClicked',
         'onSaveClicked', 'onSaveConfirmClicked', 'onSaveCancelClicked', 'onHideSearchResultsClicked',
-        'onRemoveTrackClicked', 'playOrPause');
+        'onRemoveTrackClicked', 'onAuthClicked', 'playOrPause');
 
       $('#seedtracks')
         .on('click', '.removetrack', this.onRemoveTrackClicked);
@@ -283,12 +306,18 @@
         .on('click', 'span.confirmsave', this.onSaveConfirmClicked)
         .on('click', 'span.cancelsave', this.onSaveCancelClicked);
 
+      $('#auth')
+        .on('click', '.wizard', this.onAuthClicked);
+
       // Play controls JS events
-      
       $('#play')
         .on('click', '', this.playOrPause);
 
-      $('.playcontrols ')
+      R.ready(function() {
+        if (R.authenticated()) {
+          self.loggedIn();
+        }
+      });
     },
 
     extend: function(tracks, k) {
@@ -300,7 +329,7 @@
      */
     renderTracks: function(tracks) {
       var tmp = _.template($('#tracklist-template').text());
-      $('#tracks').html(tmp({'tracks':tracks})).show();
+      $('#tracks').html(tmp({'tracks':tracks})).fadeIn();
     }
   });
 

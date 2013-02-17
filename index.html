@@ -26,12 +26,17 @@
     </script>
   </head>
   <body>
+    <div id="auth">
+      <div class="wizard">
+        <img src="wizard.jpg" />
+      </div>
+    </div>
     <div id="content" class="search">
-      <div class="left">
+      <div class="left initial">
         <div id="seedtracks">
         </div>
         <div id="searchrow">
-          <input type="text" placeholder="Search for a song" /><span class="searchbutton button">Search</span>
+          <div><input type="text" placeholder="Search for a song" /><span class="searchbutton button">Search</span></div>
         </div>
         <div id="searchresults">
           <span class="hidesearch">X</span>
@@ -41,11 +46,14 @@
         </div>
       </div>
       <div class="right">
+        <div class="wizard">
+          <img src="wizard.jpg" />
+        </div>
         <div id="go">
-          <span class="button">Get this party started!</span>
+          <span class="button">Load tracks</span>
         </div>
         <div id="save">
-          <span class="launchsave button">Save</span>
+          <span class="launchsave button">Get this party started!</span>
           <div class="savepanel">
             <input type="text" /> <span class="confirmsave button">Create</span>
             <span class="cancelsave button">Cancel</span>
