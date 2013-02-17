@@ -128,6 +128,12 @@ table td {
   color: #fff;
 }
 
+#partymode .playcontrols .previous,
+#partymode .playcontrols .next,
+#partymode .playcontrols .play {
+  cursor: pointer;
+}
+
 #tracks {
   display: none;
   width: 340px;
