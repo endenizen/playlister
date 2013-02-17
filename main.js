@@ -229,6 +229,14 @@
 
     },
 
+    playerNext: function() {
+      R.player.next();
+    },
+
+    playerPrevious: function() {
+      R.player.previous();
+    },
+
     onSaveConfirmClicked: function(e) {
       var self = this;
       var name = $('#save').find('input').val();
@@ -286,7 +294,7 @@
 
       _.bindAll(this, 'onSearchClicked', 'onSearchKeyDown', 'onSearchResultSelected', 'onGoClicked',
         'onSaveClicked', 'onSaveConfirmClicked', 'onSaveCancelClicked', 'onHideSearchResultsClicked',
-        'onRemoveTrackClicked', 'onAuthClicked', 'playOrPause');
+        'onRemoveTrackClicked', 'onAuthClicked', 'playOrPause', 'playerPrevious', 'playerNext');
 
       $('#seedtracks')
         .on('click', '.removetrack', this.onRemoveTrackClicked);
@@ -312,6 +320,12 @@
       // Play controls JS events
       $('#play')
         .on('click', '', this.playOrPause);
+
+      $('#next')
+        .on('click', '', this.playerNext);
+
+      $('#previous')
+        .on('click', '', this.playerPrevious);
 
       R.ready(function() {
         if (R.authenticated()) {
