@@ -145,6 +145,9 @@
       });
       $('#save').hide();
       $('#tracks').hide();
+      $('#searchrow').hide();
+      $('#seedtracks').find('.removetrack').hide();
+      $('#go').hide();
       this.extend(trackKeys, function(tracks) {
         R.request({
           method: 'get',
@@ -173,7 +176,7 @@
     },
 
     onSaveClicked: function(e) {
-      $('#save').find('.savepanel').show();
+      $('#save').find('.savepanel').fadeIn();
     },
 
     savePlaylist: function(name, tracks) {
@@ -220,7 +223,7 @@
     },
 
     hideSavePanel: function() {
-      $('#save').find('.savepanel').hide();
+      $('#save').find('.savepanel').fadeOut();
       $('#save').find('input').val('');
     },
 

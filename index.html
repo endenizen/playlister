@@ -18,17 +18,18 @@
       </div>
     </script>
     <script id="tracklist-template" type="text/template">
-      <ul>
+      <ul class="tracklist">
         <% _.each(tracks, function(track) { %>
-          <li data-key="<%= track.key %>"><%= track.artist %> - <%= track.name %></li>
+          <li data-key="<%= track.key %>"><img src="<%= track.icon %>" /><%= track.artist %> - <%= track.name %></li>
         <% }); %>
       </ul>
     </script>
   </head>
   <body>
-    <table height="100%" width="100%"><tr><td align="center" valign="middle">
-      <div id="content" class="search">
-        <div id="seedtracks"></div>
+    <div id="content" class="search">
+      <div class="left">
+        <div id="seedtracks">
+        </div>
         <div id="searchrow">
           <input type="text" placeholder="Search for a song" /><span class="searchbutton button">Search</span>
         </div>
@@ -36,18 +37,21 @@
           <span class="hidesearch">X</span>
           <div class="searchlist"></div>
         </div>
-        <div id="go">
-          <span class="button">GO!</span>
+        <div id="tracks">
         </div>
-        <div id="tracks"></div>
+      </div>
+      <div class="right">
+        <div id="go">
+          <span class="button">Get this party started!</span>
+        </div>
         <div id="save">
-          <span class="launchsave">Save</span>
+          <span class="launchsave button">Save</span>
           <div class="savepanel">
             <input type="text" /> <span class="confirmsave button">Create</span>
             <span class="cancelsave button">Cancel</span>
           </div>
         </div>
       </div>
-    </td></tr></table>
+    </div>
   </body>
 </html>
