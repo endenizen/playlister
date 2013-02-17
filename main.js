@@ -24,60 +24,73 @@
         url: url,
         dataType: 'jsonp',
         success: function(results) {
-          callback(results.response.songs);
+          callback(results.response);
         },
         cache: true
       });
     },
 
-    songIds: function(rdioTrackKeys) {
+    songIds: function(rdioTrackKeys, k) {
       // FIXME(Jon): Ugly as shit and should take a country code
+      var done = _.after(rdioTrackKeys.length, function() {
+        k(echonestIds)
+      });
       var echonestIds = [];
       _.each(rdioTrackKeys, function(list) {
-        echonestIds.push("rdio-US:track:" + list);
+        Echonest.call('song', 'profile', {
+          track_id: "rdio-US:track:" + list
+        }, 
+        function(results) {
+          if (results.status.code === 0 && results.songs.length) { // 0 means success!
+            echonestIds.push(results.songs[0].id)
+          } else {
+            console.log("ID: " + list + " missing in echonest :'(")
+          }
+          done();
+        });
       });
-      return echonestIds
     },
 
     songRadio: function(trackKeys, k) {
-      var enkeys = this.songIds(trackKeys);
+      Echonest.songIds(trackKeys, function(enkeys) {
 
-      var params = {
-        track_id: enkeys, 
-        type: 'song-radio', 
-        limit: true, 
-        results: 30,
-        song_type: 'studio:seed'
-      };
+        var params = {
+          song_id: enkeys, 
+          type: 'song-radio', 
+          limit: true, 
+          results: 30,
+          song_type: 'studio:seed'
+        };
 
-      this.call('playlist', 'static', params, function(results) {
-        var res = [];
-        if (results.length){
-          // Take each result and get eh foreign id.
-          // Sample JSON and explains the shitshow below.
-          // "songs": [
-          //   {
-          //     "foreign_ids": [
-          //       {
-          //         "catalog": "rdio-us-streaming",
-          //         "foreign_id": "rdio-us-streaming:song:t6520763"
-          //       }
-          //     ],
-          //     "artist_id": "ARJCGQP1187FB525E0",
-          //     "id": "SODDXKX12AB017E3B0",
-          //     "artist_name": "Serotone",
-          //     "title": "Shattered"
-          //   },
-          _.each(results, function(result) {
-            res.push(result.foreign_ids[0].foreign_id.split(':')[2]);
-          });
-        } else { // No results, move on.
-          res = [];
-          console.log("No Results!");
-        }
-        k(res);
+        Echonest.call('playlist', 'static', params, function(results) {
+          var res = [];
+          if (results.songs.length) {
+            // Take each result and get eh foreign id.
+            // Sample JSON and explains the shitshow below.
+            // "songs": [
+            //   {
+            //     "foreign_ids": [
+            //       {
+            //         "catalog": "rdio-us-streaming",
+            //         "foreign_id": "rdio-us-streaming:song:t6520763"
+            //       }
+            //     ],
+            //     "artist_id": "ARJCGQP1187FB525E0",
+            //     "id": "SODDXKX12AB017E3B0",
+            //     "artist_name": "Serotone",
+            //     "title": "Shattered"
+            //   },
+            _.each(results.songs, function(result) {
+              res.push(result.foreign_ids[0].foreign_id.split(':')[2]);
+            });
+          } else { // No results, move on.
+            res = [];
+            console.log("No Results!");
+          }
+          k(res);
+        });
       });
-    }
+    },
   };
 
   var Playlister = function() {
