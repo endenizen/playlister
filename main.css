@@ -191,21 +191,20 @@ table td {
   opacity: 0.3;
   color: #fff;
   font-size: 32px;
-
+  transition: opacity 0.25s linear;
+  -moz-transition: opacity 0.25s linear;
+  -webkit-transition: opacity 0.25s linear;
 }
 
 #partymode .playcontrols:hover {
   opacity: 1.0;
 }
 
-.playcontrols #play {
-  padding: 0 10px;
-}
-
 #partymode .playcontrols .previous,
 #partymode .playcontrols .next,
 #partymode .playcontrols .play {
   cursor: pointer;
+  padding: 0 5px;
 }
 
 #tracks {
