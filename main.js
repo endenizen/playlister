@@ -207,7 +207,7 @@
       _.each($('#seedtracks, #tracks ul').children(), function(trackEl) {
         tracks.push($(trackEl).data('key'));
       });
-      if (R.authenticated) {
+      if (R.authenticated()) {
         this.savePlaylist(name, tracks);
       } else {
         R.authenticate(function() {
