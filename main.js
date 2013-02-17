@@ -197,7 +197,19 @@
 
     launchPartyMode: function(playlistKey) {
       R.player.play({ source: playlistKey });
-      $('#content').hide();
+      $('.search').fadeOut();
+      $('.partyMode').fadeIn();
+
+      R.player.on("change:playingTrack", function(song) {
+        $('#artwork').attr('src', song.get('icon').replace('200', '1200'));
+      });
+    },
+
+    // Player controls
+
+    playOrPause: function() {
+      R.player.togglePause();
+
     },
 
     onSaveConfirmClicked: function(e) {
@@ -251,7 +263,7 @@
 
       _.bindAll(this, 'onSearchClicked', 'onSearchKeyDown', 'onSearchResultSelected', 'onGoClicked',
         'onSaveClicked', 'onSaveConfirmClicked', 'onSaveCancelClicked', 'onHideSearchResultsClicked',
-        'onRemoveTrackClicked');
+        'onRemoveTrackClicked', 'playOrPause');
 
       $('#seedtracks')
         .on('click', '.removetrack', this.onRemoveTrackClicked);
@@ -270,6 +282,13 @@
         .on('click', 'span.launchsave', this.onSaveClicked)
         .on('click', 'span.confirmsave', this.onSaveConfirmClicked)
         .on('click', 'span.cancelsave', this.onSaveCancelClicked);
+
+      // Play controls JS events
+      
+      $('#play')
+        .on('click', '', this.playOrPause);
+
+      $('.playcontrols ')
     },
 
     extend: function(tracks, k) {

@@ -91,8 +91,22 @@ table td {
   text-transform: uppercase;
 }
 
-.playcontrols {
+.partyMode {
   display: none;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.partyMode #artwork {
+  height: 100%;
+  margin: 0 auto;
+}
+
+.partyMode .playControls {
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
 }
 
 #tracks {
