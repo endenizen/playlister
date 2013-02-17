@@ -86,6 +86,28 @@ table td {
   text-align: center;
 }
 
+#auth .wizard img {
+  cursor: pointer;
+}
+
+#auth .message {
+  display: none;
+  font-size: 70px;
+  padding-left: 27px;
+  margin-top: 10px;
+}
+
+#auth.loggedout .message {
+  display: block;
+}
+
+#auth.loggedout .wizard {
+  animation: wizwig 0.5s alternate alternate ease-in-out;
+  -moz-animation: wizwig 0.5s infinite alternate ease-in-out; /* Firefox */
+  -webkit-animation: wizwig 0.5s infinite alternate ease-in-out; /* Safari and Chrome */
+  -o-animation: wizwig 0.5s infinite alternate ease-in-out; /* Opera */
+}
+
 #content {
   display: none;
   margin: 20px auto;
@@ -339,6 +361,24 @@ table td {
 {
   from { -webkit-transform: rotate(0deg); }
   to { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes wizwig
+{
+  from { transform: rotate(-5deg); }
+  to { transform: rotate(5deg); }
+}
+
+@-moz-keyframes wizwig
+{
+  from { -moz-transform: rotate(-5deg); }
+  to { -moz-transform: rotate(5deg); }
+}
+
+@-webkit-keyframes wizwig
+{
+  from { -webkit-transform: rotate(-5deg); }
+  to { -webkit-transform: rotate(5deg); }
 }
 
 .wizard.loading {

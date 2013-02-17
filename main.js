@@ -108,7 +108,10 @@
     onSearchClicked: function() {
       var self = this;
 
-      var query = $('#searchrow').find('input').val();
+      var query = $.trim($('#searchrow').find('input').val());
+      if (!query || query.length === 0) {
+        return;
+      }
 
       // call api
       R.request({
@@ -290,8 +293,10 @@
 
     onAuthClicked: function() {
       var self = this;
-      R.authenticate(function() {
-        self.loggedIn();
+      R.authenticate(function(loggedin) {
+        if (loggedin) {
+          self.loggedIn();
+        }
       })
     },
 
@@ -337,9 +342,6 @@
         .on('click', 'span.confirmsave', this.onSaveConfirmClicked)
         .on('click', 'span.cancelsave', this.onSaveCancelClicked);
 
-      $('#auth')
-        .on('click', '.wizard', this.onAuthClicked);
-
       $('.right')
         .on('click', '.wizard', this.onWizardClicked);
 
@@ -351,6 +353,8 @@
       R.ready(function() {
         if (R.authenticated()) {
           self.loggedIn();
+        } else {
+          $('#auth').click(self.onAuthClicked).addClass('loggedout');
         }
       });
     },
