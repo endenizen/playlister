@@ -326,7 +326,9 @@
 
       $('#searchresults')
         .on('click', 'li', this.onSearchResultSelected)
-        .on('click', '.hidesearch', this.onHideSearchResultsClicked);
+        .on('click', '.hidesearch', this.onHideSearchResultsClicked)
+        .click(this.onHideSearchResultsClicked);
+
 
       $('#go').on('click', 'span', this.onGoClicked);
 
