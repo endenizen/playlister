@@ -215,7 +215,7 @@
     launchPartyMode: function(playlistKey) {
       R.player.play({ source: playlistKey });
       $('.search').fadeOut();
-      $('.partyMode').fadeIn();
+      $('#partymode').fadeIn();
       $('body').addClass('partymode');
 
       R.player.on("change:playingTrack", function(song) {
@@ -224,10 +224,8 @@
     },
 
     // Player controls
-
     playOrPause: function() {
       R.player.togglePause();
-
     },
 
     playerNext: function() {
@@ -327,15 +325,10 @@
       $('.right')
         .on('click', '.wizard', this.onWizardClicked);
 
-      // Play controls JS events
-      $('#play')
-        .on('click', '', this.playOrPause);
-
-      $('#next')
-        .on('click', '', this.playerNext);
-
-      $('#previous')
-        .on('click', '', this.playerPrevious);
+      $('#partymode')
+        .on('click', '.play', this.playOrPause)
+        .on('click', '.next', this.playerNext)
+        .on('click', '.previous', this.playerPrevious);
 
       R.ready(function() {
         if (R.authenticated()) {
