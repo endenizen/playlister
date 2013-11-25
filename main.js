@@ -238,7 +238,9 @@
       $('body').addClass('partymode');
 
       R.player.on("change:playingTrack", function(song) {
-        $('#artwork').attr('src', song.get('icon').replace('200', '1200'));
+        $('#artwork')
+          .attr('src', song.get('icon').replace('square-200', 'square-1200'))
+          .attr('src', song.get('icon').replace('square-400', 'square-1200'));
       });
     },
 
